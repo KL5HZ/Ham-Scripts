@@ -1,3 +1,4 @@
+cat << 'EOF' > install_wsjtx.sh
 #!/bin/bash
 
 # Update package list
@@ -34,3 +35,6 @@ echo "Verifying WSJT-X installation..."
 wsjtx --version
 
 echo "Installation complete. Enjoy using WSJT-X!"
+EOF
+
+chmod +x install_wsjtx.sh
