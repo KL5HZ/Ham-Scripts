@@ -40,5 +40,7 @@ js8spotter --version
 
 echo "Installation complete. Enjoy using js8spotter!"
 echo "JS8Spotter is an incomplete product, resulting in not being able to make shortcut for program."
-echo "To start JS8Spotter, right click and choose to run as a program inside js8spotter-112b directory."
+echo "To start JS8Spotter, there are two options:
+1: Right click and choose to run as a program inside js8spotter-112b directory
+2: Run the program in terminal with 'python3 /path/to/js8spotter.py."
 EOF
