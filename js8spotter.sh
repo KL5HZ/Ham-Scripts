@@ -38,3 +38,5 @@ echo "Installation complete. Enjoy using js8spotter!"
 echo "JS8Spotter is an incomplete product, resulting in not being able to make shortcut for program."
 echo "To start JS8Spotter, right click and choose to run as a program inside js8spotter-111b directory."
 EOF
+
+chmod +x install_js8spotter.sh && ./install_js8spotter.sh
