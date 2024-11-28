@@ -11,7 +11,7 @@ sudo apt install python3-tk python3-pil python-pil.imagetk python3-requests pyth
 
 # Download js8spotter package
 echo "Downloading js8spotter zip..."
-wget -O js8spotter-111b.zip "https://kf7mix.com/file/js8spotter/js8spotter-111b.zip"
+wget "https://kf7mix.com/file/js8spotter/js8spotter-111b.zip"
 
 #Unzip js8spotter
 echo "Unzipping js8spotter..."
