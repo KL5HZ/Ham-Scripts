@@ -45,9 +45,16 @@ Terminal=false
 Type=Application
 EOF
 
-# Set permissions
+# Set permissions and enable 'Allow Launching'
 chmod +x $HOME/js8spotter-112b/js8spotter.py
 chmod +x $HOME/Desktop/JS8Spotter.desktop
+
+# Enable 'Allow Launching' if supported
+if command -v gio &> /dev/null; then
+    gio set $HOME/Desktop/JS8Spotter.desktop metadata::trusted true
+else
+    echo "gio not found; skipping 'Allow Launching' setup."
+fi
 
 # Clean up unnecessary files
 echo "Cleaning up..."
