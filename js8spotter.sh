@@ -27,18 +27,18 @@ echo "[Desktop Entry]
 Version=1.0
 Name=JS8Spotter
 Comment=JS8Spotter
-Exec=python3 /home/user/js8spotter-112b/js8spotter.py
-Icon=/home/user/js8spotter-112b/js8spotter.ico
-Path=/home/user/js8spotter-112b/
+Exec=python3 ~/js8spotter-112b/js8spotter.py
+Icon=~/js8spotter-112b/js8spotter.ico
+Path=~/js8spotter-112b/
 Terminal=false
-Type=Application" > /home/user/Desktop/JS8Spotter.desktop
+Type=Application" > ~/Desktop/JS8Spotter.desktop
 
 #Make file exectuable
-chmod a+x /home/user/js8spotter-112b/js8spotter.py
-gio set /home/user/Desktop/JS8Spotter.desktop  metadata::trusted true
+chmod a+x ~/js8spotter-112b/js8spotter.py
+gio set ~/Desktop/JS8Spotter.desktop  metadata::trusted true
 
 #Make Desktop shortcut executable
-sudo chmod a+x /home/user/Desktop/JS8Spotter.desktop
+sudo chmod a+x ~/Desktop/JS8Spotter.desktop
 
 # Clean up unnecessary files
 echo "Cleaning up..."
