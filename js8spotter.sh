@@ -6,12 +6,12 @@ echo "Updating package list..."
 sudo apt-get update
 
 #Install required python packages
-echo "Installing python packes..."
-sudo apt install python3-tk
-sudo apt install python3-pil
-sudo apt install python-pil.imagetk
-sudo apt install python3-requests
-sudo apt install python3-tksnack
+echo "Installing python packages..."
+sudo apt install python3-tk -y
+sudo apt install python3-pil -y
+sudo apt install python-pil.imagetk -y
+sudo apt install python3-requests -y
+sudo apt install python3-tksnack -y
 
 # Download js8spotter package
 echo "Downloading js8spotter zip..."
@@ -36,14 +36,14 @@ echo "[Desktop Entry]
 Version=1.0
 Name=JS8Spotter
 Comment=JS8Spotter
-Exec=python3 ~/Ham-Scripts/js8spotter-112b/js8spotter.py
-Icon=~/Ham-Scripts/js8spotter-112b/js8spotter.ico
-Path=~/Ham-Scripts/js8spotter-112b/
+Exec=python3 ~/js8spotter-112b/js8spotter.py
+Icon=~/js8spotter-112b/js8spotter.ico
+Path=~/js8spotter-112b/
 Terminal=false
 Type=Application" > JS8Spotter.desktop
 
 #Make file exectuable
-chmod a+x ~/Ham-Scripts/js8spotter-112b/js8spotter.py
+chmod a+x ~/js8spotter-112b/js8spotter.py
 gio set ~/Desktop/JS8Spotter.desktop  metadata::trusted true
 cd ~/Desktop
 chmod +x ~/Desktop/JS8Spotter.desktop
