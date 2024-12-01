@@ -1,49 +1,56 @@
-cat << 'EOF' > install_js8spotter.sh && chmod +x install_js8spotter.sh && ./install_js8spotter.sh
 #!/bin/bash
 
 # Update package list
 echo "Updating package list..."
-sudo apt-get update
+if ! sudo apt-get update; then
+  echo "Failed to update package list. Exiting..."
+  exit 1
+fi
 
-#Install required python packages
-echo "Installing python packages..."
-sudo apt install python3-tk -y
-sudo apt install python3-pil -y
-sudo apt install python3-pil.imagetk -y
-sudo apt install python3-requests -y
-sudo apt install python3-tksnack -y
+# Install required Python packages
+echo "Installing Python packages..."
+if ! sudo apt install -y python3-tk python3-pil python3-pil.imagetk python3-requests python3-tksnack; then
+  echo "Failed to install Python packages. Exiting..."
+  exit 1
+fi
 
 # Download js8spotter package
 echo "Downloading js8spotter zip..."
-wget "https://kf7mix.com/files/js8spotter/js8spotter-112b.zip"
+if ! wget -q "https://kf7mix.com/files/js8spotter/js8spotter-112b.zip"; then
+  echo "Failed to download js8spotter. Exiting..."
+  exit 1
+fi
 
-#Unzip js8spotter
+# Unzip js8spotter
 echo "Unzipping js8spotter..."
-unzip js8spotter-112b.zip
+if ! unzip -o js8spotter-112b.zip; then
+  echo "Failed to unzip js8spotter. Exiting..."
+  exit 1
+fi
 
-#Create desktop shortcut
+# Remove zip file
+rm js8spotter-112b.zip
+
+# Create desktop shortcut
 echo "Creating js8spotter desktop shortcut..."
-echo "[Desktop Entry]
+cat <<EOF > ~/.local/share/applications/JS8Spotter.desktop
+[Desktop Entry]
 Version=1.0
 Name=JS8Spotter
 Comment=JS8Spotter
-Exec=python3 ~/js8spotter-112b/js8spotter.py
-Icon=~/js8spotter-112b/js8spotter.ico
-Path=~/js8spotter-112b/
+Exec=python3 $HOME/js8spotter-112b/js8spotter.py
+Icon=$HOME/js8spotter-112b/js8spotter.ico
+Path=$HOME/js8spotter-112b/
 Terminal=false
-Type=Application" > ~/Desktop/JS8Spotter.desktop
+Type=Application
+EOF
 
-#Make file exectuable
-chmod a+x ~/js8spotter-112b/js8spotter.py
-gio set ~/Desktop/JS8Spotter.desktop  metadata::trusted true
-
-#Make Desktop shortcut executable
-sudo chmod a+x ~/Desktop/JS8Spotter.desktop
+# Set permissions
+chmod +x $HOME/js8spotter-112b/js8spotter.py
+chmod +x ~/.local/share/applications/JS8Spotter.desktop
 
 # Clean up unnecessary files
 echo "Cleaning up..."
-sudo apt-get autoremove -y
-sudo apt-get clean
+sudo apt-get autoremove -y && sudo apt-get clean
 
-echo "Installation complete. Enjoy using js8spotter!"
-EOF
+echo "Installation complete. Enjoy using JS8Spotter!"
