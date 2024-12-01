@@ -29,6 +29,25 @@ cd js8spotter-112b/
 echo "Making js8spotter executable..."
 chmod +x js8spotter.py
 
+#Create desktop shortcut
+echo "Creating js8spotter desktop shortcut..."
+cd ~/Desktop
+echo "[Desktop Entry]
+Version=1.0
+Name=JS8Spotter
+Comment=JS8Spotter
+Exec=python3 ~/Ham-Scripts/js8spotter-112b/js8spotter.py
+Icon=~/Ham-Scripts/js8spotter-112b/js8spotter.ico
+Path=~/Ham-Scripts/js8spotter-112b/
+Terminal=false
+Type=Application" > JS8Spotter.desktop
+
+#Make file exectuable
+chmod a+x ~/Ham-Scripts/js8spotter-112b/js8spotter.py
+gio set ~/Desktop/JS8Spotter.desktop  metadata::trusted true
+cd ~/Desktop
+chmod +x ~/Desktop/JS8Spotter.desktop
+
 # Clean up unnecessary files
 echo "Cleaning up..."
 sudo apt-get autoremove -y
