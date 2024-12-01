@@ -49,9 +49,5 @@ echo "Cleaning up..."
 sudo apt-get autoremove -y
 sudo apt-get clean
 
-# Verify installation
-echo "Verifying js8spotter installation..."
-js8spotter --version
-
 echo "Installation complete. Enjoy using js8spotter!"
 EOF
