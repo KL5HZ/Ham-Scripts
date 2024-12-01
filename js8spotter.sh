@@ -21,10 +21,6 @@ wget "https://kf7mix.com/files/js8spotter/js8spotter-112b.zip"
 echo "Unzipping js8spotter..."
 unzip js8spotter-112b.zip
 
-#Make js8spotter executable
-echo "Making js8spotter executable..."
-chmod a+x ~/js8spotter-112b/js8spotter.py
-
 #Create desktop shortcut
 echo "Creating js8spotter desktop shortcut..."
 echo "[Desktop Entry]
@@ -42,7 +38,7 @@ chmod a+x ~/js8spotter-112b/js8spotter.py
 gio set ~/Desktop/JS8Spotter.desktop  metadata::trusted true
 
 #Make Desktop shortcut executable
-chmod a+x ~/Desktop/JS8Spotter.desktop
+sudo chmod a+x ~/Desktop/JS8Spotter.desktop
 
 # Clean up unnecessary files
 echo "Cleaning up..."
