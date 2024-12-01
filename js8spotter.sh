@@ -9,7 +9,7 @@ sudo apt-get update
 echo "Installing python packages..."
 sudo apt install python3-tk -y
 sudo apt install python3-pil -y
-sudo apt install python-pil.imagetk -y
+sudo apt install python3-pil.imagetk -y
 sudo apt install python3-requests -y
 sudo apt install python3-tksnack -y
 
