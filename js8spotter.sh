@@ -33,7 +33,7 @@ rm js8spotter-112b.zip
 
 # Create desktop shortcut
 echo "Creating js8spotter desktop shortcut..."
-cat <<EOF > ~/.local/share/applications/JS8Spotter.desktop
+cat <<EOF > $HOME/Desktop/JS8Spotter.desktop
 [Desktop Entry]
 Version=1.0
 Name=JS8Spotter
@@ -47,7 +47,7 @@ EOF
 
 # Set permissions
 chmod +x $HOME/js8spotter-112b/js8spotter.py
-chmod +x ~/.local/share/applications/JS8Spotter.desktop
+chmod +x $HOME/Desktop/JS8Spotter.desktop
 
 # Clean up unnecessary files
 echo "Cleaning up..."
