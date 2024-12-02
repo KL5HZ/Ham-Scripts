@@ -6,11 +6,11 @@
 # Purpose : Main installer for Ham Radio programs
 
 #Check for updates
-echo "Checking for update..."
+echo "Checking for updates..."
 
 #Install programs
 echo "Starting install..."
 
 #Programs to install
-sh ./install-js8spotter.sh
-sh ./install-wsjtx.sh
+sh ./$HOME/Ham-Scripts/install-js8spotter.sh
+sh ./$HOME/Ham-Scripts/install-wsjtx.sh
