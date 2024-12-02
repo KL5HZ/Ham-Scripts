@@ -15,5 +15,5 @@ echo "Starting install..."
 cd $HOME/Ham-Scripts
 
 #Programs to install
-sh .install-js8spotter.sh
-sh .install-wsjtx.sh
+sh ./install-js8spotter.sh
+sh ./install-wsjtx.sh
