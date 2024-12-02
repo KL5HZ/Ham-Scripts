@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Author  : Anthony Wodoward
+# Author  : Anthony Woodward
 # Date    : 1 December 2024
 # Updated : 22 November 2024
 # Purpose : Main installer for Ham Radio programs
