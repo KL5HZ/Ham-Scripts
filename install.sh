@@ -18,3 +18,7 @@ mv $HOME/Ham-Scripts/install-wsjtx.sh $HOME/install-wsjtx.sh
 #Programs to install
 sh ./install-js8spotter.sh
 sh ./install-wsjtx.sh
+
+#Return script to original directory
+mv $HOME/install-js8spotter.sh $HOME/Ham-Scripts/install-js8spotter.sh
+mv $HOME/install-wsjtx.sh $HOME/Ham-Scripts/install-wsjtx.sh
