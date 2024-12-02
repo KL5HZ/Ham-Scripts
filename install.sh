@@ -11,6 +11,9 @@ echo "Checking for updates..."
 #Install programs
 echo "Starting install..."
 
+#Change into directory
+cd $HOME/Ham-Scripts
+
 #Programs to install
-sh .$HOME/Ham-Scripts/install-js8spotter.sh
-sh .$HOME/Ham-Scripts/install-wsjtx.sh
+sh .install-js8spotter.sh
+sh .install-wsjtx.sh
