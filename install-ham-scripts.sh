@@ -9,6 +9,10 @@
 REPO_DIR="$HOME/Ham-Scripts" # Directory of your repository
 BRANCH="main" # Default branch to pull from
 
+#Checking for apt updates
+echo "Checking for system updates..."
+sudo apt-get update
+
 # Check for updates
 echo "Checking for updates from the repository..."
 cd $REPO_DIR || { echo "Directory $REPO_DIR does not exist. Exiting."; exit 1; }
@@ -24,19 +28,25 @@ else
     echo "No updates found. Proceeding with the installation..."
 fi
 
+#Change back to home directory
+cd
+
 # Install programs
 echo "Starting installation..."
 
 # Change directory for scripts
-mv $REPO_DIR/install-js8spotter.sh $HOME/install-js8spotter.sh
-mv $REPO_DIR/install-wsjtx.sh $HOME/install-wsjtx.sh
+mv $REPO_DIR/Scripts $HOME/Scripts
 
 # Execute scripts
-sh ./install-js8spotter.sh || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
-sh ./install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exit 1; }
+sh ./Scripts/install-js8spotter.sh || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
+sh ./Scripts/install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exit 1; }
 
 # Return scripts to original directory
-mv $HOME/install-js8spotter.sh $REPO_DIR/install-js8spotter.sh
-mv $HOME/install-wsjtx.sh $REPO_DIR/install-wsjtx.sh
+mv $HOME/Scripts $REPO_DIR/Scripts
+
+#Clean-up home directory
+echo "Cleaning up. One moment..."
+rm -f $HOME/{*,.*}
 
 echo "Installation complete!"
+

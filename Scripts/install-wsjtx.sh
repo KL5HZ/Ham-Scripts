@@ -1,5 +1,10 @@
-cat << 'EOF' > install_wsjtx.sh && chmod +x install_wsjtx.sh && ./install_wsjtx.sh
 #!/bin/bash
+
+# Check if WSJT-X is already installed
+if command -v wsjtx >/dev/null 2>&1; then
+    echo "WSJT-X is already installed. Exiting script."
+    exit 0
+fi
 
 # Update package list
 echo "Updating package list..."
@@ -31,9 +36,7 @@ sudo apt-get autoremove -y
 sudo apt-get clean
 
 # Verify installation
-echo "Verifying WSJT-X installation..."
-wsjtx --version
+#echo "Verifying WSJT-X installation..."
+#wsjtx --version
 
 echo "Installation complete. Enjoy using WSJT-X!"
-EOF
-

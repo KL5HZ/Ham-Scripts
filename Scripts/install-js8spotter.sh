@@ -61,3 +61,4 @@ echo "Cleaning up..."
 sudo apt-get autoremove -y && sudo apt-get clean
 
 echo "Installation complete. Enjoy using JS8Spotter!"
+
