@@ -33,8 +33,8 @@ sudo apt-get autoremove -y
 sudo apt-get clean
 
 # Verify installation
-echo "Verifying WSJT-X installation..."
-wsjtx --version
+#echo "Verifying WSJT-X installation..."
+#wsjtx --version
 
 echo "Installation complete. Enjoy using WSJT-X!"
 
