@@ -9,6 +9,10 @@
 REPO_DIR="$HOME/Ham-Scripts" # Directory of your repository
 BRANCH="main" # Default branch to pull from
 
+#Checking for apt updates
+echo "Checking for system updates..."
+sudo apt-get update
+
 # Check for updates
 echo "Checking for updates from the repository..."
 cd $REPO_DIR || { echo "Directory $REPO_DIR does not exist. Exiting."; exit 1; }
