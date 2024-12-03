@@ -1,6 +1,3 @@
-cat << 'EOF' > install-ham-scripts.sh && chmod +x install-ham-scripts.sh && ./install-ham-scripts.sh
-EOF
-
 #!/bin/bash
 #
 # Author  : Anthony Woodward

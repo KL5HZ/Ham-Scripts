@@ -1,6 +1,3 @@
-cat << 'EOF' > install_wsjtx.sh && chmod +x install_wsjtx.sh && ./install_wsjtx.sh
-EOF
-
 #!/bin/bash
 
 # Check if WSJT-X is already installed

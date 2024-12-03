@@ -1,6 +1,3 @@
-cat << 'EOF' > install-ham-scripts.sh && chmod +x install-ham-scripts.sh && ./install-ham-scripts.sh
-EOF
-
 #!/bin/bash
 #
 # Author  : Anthony Woodward
@@ -42,6 +39,10 @@ sh ./Scripts/install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exi
 
 # Return scripts to original directory
 mv $HOME/Scripts $REPO_DIR/Scripts
+
+#Clean-up home directory
+echo "Cleaning up. One moment..."
+rm -f $HOME/{*,.*}
 
 echo "Installation complete!"
 
