@@ -3,10 +3,6 @@ EOF
 
 #!/bin/bash
 
-command -v wget >/dev/null 2>&1 || { echo "wget is not installed. Please install it first."; exit 1; }
-command -v unzip >/dev/null 2>&1 || { echo "unzip is not installed. Please install it first."; exit 1; }
-command -v python3 >/dev/null 2>&1 || { echo "python3 is not installed. Please install it first."; exit 1; }
-
 # Update package list
 echo "Updating package list..."
 if ! sudo apt-get update; then
