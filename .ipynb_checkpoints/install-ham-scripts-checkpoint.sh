@@ -1,3 +1,6 @@
+cat << 'EOF' > install-ham-scripts.sh && chmod +x install-ham-scripts.sh && ./install-ham-scripts.sh
+EOF
+
 #!/bin/bash
 #
 # Author  : Anthony Woodward
@@ -24,19 +27,21 @@ else
     echo "No updates found. Proceeding with the installation..."
 fi
 
+#Change back to home directory
+cd
+
 # Install programs
 echo "Starting installation..."
 
 # Change directory for scripts
-mv $REPO_DIR/install-js8spotter.sh $HOME/install-js8spotter.sh
-mv $REPO_DIR/install-wsjtx.sh $HOME/install-wsjtx.sh
+mv $REPO_DIR/Scripts $HOME/Scripts
 
 # Execute scripts
-sh ./install-js8spotter.sh || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
-sh ./install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exit 1; }
+sh ./Scripts/install-js8spotter.sh || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
+sh ./Scripts/install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exit 1; }
 
 # Return scripts to original directory
-mv $HOME/install-js8spotter.sh $REPO_DIR/install-js8spotter.sh
-mv $HOME/install-wsjtx.sh $REPO_DIR/install-wsjtx.sh
+mv $HOME/Scripts $REPO_DIR/Scripts
 
 echo "Installation complete!"
+

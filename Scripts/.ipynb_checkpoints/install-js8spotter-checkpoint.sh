@@ -1,3 +1,6 @@
+cat << 'EOF' > install-js8spotter.sh && chmod +x install-js8spotter.sh && ./install-js8spotter.sh
+EOF
+
 #!/bin/bash
 
 # Update package list
