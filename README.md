@@ -9,7 +9,7 @@ sudo apt install git
 
 Then, install everything with this command:
 ```
-git clone https://github.com/KL5HZ/Ham-Scripts.git $HOME/Ham-Scripts && bash $HOME/Ham-Scripts/install.sh
+git clone https://github.com/KL5HZ/Ham-Scripts.git $HOME/Ham-Scripts && bash $HOME/Ham-Scripts/install-ham-scripts.sh
 ```
 
 Or choose the Ham software you want and 'wget' the raw url of that script. Then run 'sh ./(file name)'.
