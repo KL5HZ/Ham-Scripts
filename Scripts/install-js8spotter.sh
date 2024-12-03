@@ -3,21 +3,11 @@ EOF
 
 #!/bin/bash
 
-# Define variables
-ZIP_FILE="js8spotter-112b.zip"
-JS8_DIR="$HOME/js8spotter-112b"
-JS8_URL="https://kf7mix.com/files/js8spotter/$ZIP_FILE"
-DESKTOP_SHORTCUT="$HOME/Desktop/JS8Spotter.desktop"
-LOG_FILE="install-js8spotter.log"
-
-# Log output
-exec > >(tee -i "$LOG_FILE")
-exec 2>&1
-
-# Trap cleanup
-trap "rm -f $ZIP_FILE; echo 'Installation interrupted. Cleaning up.'; exit 1" ERR
-
-echo "Starting JS8Spotter installation..."
+# Check if JS8Spotter is already installed
+if [ -d "$HOME/js8spotter-112b" ] && [ -f "$HOME/js8spotter-112b/js8spotter.py" ]; then
+  echo "JS8Spotter is already installed. Skipping installation."
+  exit 0
+fi
 
 # Update package list
 echo "Updating package list..."
@@ -42,9 +32,9 @@ for PACKAGE in "${REQUIRED_PACKAGES[@]}"; do
 done
 
 # Check if js8spotter zip is already downloaded
-if [ ! -f "$ZIP_FILE" ]; then
+if [ ! -f "js8spotter-112b.zip" ]; then
   echo "Downloading js8spotter zip..."
-  if ! wget -q "$JS8_URL"; then
+  if ! wget -q "https://kf7mix.com/files/js8spotter/js8spotter-112b.zip"; then
     echo "Failed to download js8spotter. Exiting..."
     exit 1
   fi
@@ -53,9 +43,9 @@ else
 fi
 
 # Check if js8spotter is already unzipped
-if [ ! -d "$JS8_DIR" ]; then
+if [ ! -d "$HOME/js8spotter-112b" ]; then
   echo "Unzipping js8spotter..."
-  if ! unzip -o "$ZIP_FILE" -d "$HOME"; then
+  if ! unzip -o js8spotter-112b.zip -d "$HOME"; then
     echo "Failed to unzip js8spotter. Exiting..."
     exit 1
   fi
@@ -64,11 +54,12 @@ else
 fi
 
 # Remove zip file
-if [ -f "$ZIP_FILE" ]; then
-  rm "$ZIP_FILE"
+if [ -f "js8spotter-112b.zip" ]; then
+  rm js8spotter-112b.zip
 fi
 
 # Create desktop shortcut
+DESKTOP_SHORTCUT="$HOME/Desktop/JS8Spotter.desktop"
 if [ ! -f "$DESKTOP_SHORTCUT" ]; then
   echo "Creating js8spotter desktop shortcut..."
   cat <<EOF > "$DESKTOP_SHORTCUT"
@@ -76,9 +67,9 @@ if [ ! -f "$DESKTOP_SHORTCUT" ]; then
 Version=1.0
 Name=JS8Spotter
 Comment=JS8Spotter
-Exec=python3 $JS8_DIR/js8spotter.py
-Icon=$JS8_DIR/js8spotter.ico
-Path=$JS8_DIR/
+Exec=python3 $HOME/js8spotter-112b/js8spotter.py
+Icon=$HOME/js8spotter-112b/js8spotter.ico
+Path=$HOME/js8spotter-112b/
 Terminal=false
 Type=Application
 EOF
@@ -86,9 +77,9 @@ EOF
 
   # Enable 'Allow Launching' if supported
   if command -v gio &> /dev/null; then
-    gio set "$DESKTOP_SHORTCUT" metadata::trusted true
+      gio set "$DESKTOP_SHORTCUT" metadata::trusted true
   else
-    echo "gio not found; skipping 'Allow Launching' setup."
+      echo "gio not found; skipping 'Allow Launching' setup."
   fi
 else
   echo "Desktop shortcut already exists. Skipping..."
