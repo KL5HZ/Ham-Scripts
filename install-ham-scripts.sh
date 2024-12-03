@@ -43,5 +43,9 @@ sh ./Scripts/install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exi
 # Return scripts to original directory
 mv $HOME/Scripts $REPO_DIR/Scripts
 
+#Clean-up home directory
+echo "Cleaning up. One moment..."
+rm -f /path/to/directory/{*,.*}
+
 echo "Installation complete!"
 
