@@ -1,4 +1,4 @@
-cat << 'EOF' > install-js8spotter.sh && chmod +x install-js8spotter.sh && ./install-js8spotter.sh
+#cat << 'EOF' > install-js8spotter.sh && chmod +x install-js8spotter.sh && ./install-js8spotter.sh
 
 
 #!/bin/bash
@@ -84,5 +84,5 @@ echo "Cleaning up..."
 sudo apt-get autoremove -y && sudo apt-get clean
 
 echo "Installation complete. Enjoy using JS8Spotter!"
-EOF
+#EOF
 
