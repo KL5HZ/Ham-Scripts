@@ -31,13 +31,13 @@ cd
 echo "Starting installation..."
 
 # Change directory for scripts
-mv $REPO_DIR/install-*.sh $HOME/install-*.sh
+mv $REPO_DIR/Scripts $HOME/Scripts
 
 # Execute scripts
-sh ./install-js8spotter.sh || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
-sh ./install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exit 1; }
+sh .$HOME/Scripts/install-js8spotter.sh || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
+sh .$HOME/Scripts/install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exit 1; }
 
 # Return scripts to original directory
-mv $HOME/install-*.sh $REPO_DIR/install-*.sh
+mv $HOME/Scripts $REPO_DIR/Scripts
 
 echo "Installation complete!"
