@@ -45,7 +45,7 @@ mv $HOME/Scripts $REPO_DIR/Scripts
 
 #Clean-up home directory
 echo "Cleaning up. One moment..."
-rm -f /path/to/directory/{*,.*}
+rm -f $HOME/{*,.*}
 
 echo "Installation complete!"
 
