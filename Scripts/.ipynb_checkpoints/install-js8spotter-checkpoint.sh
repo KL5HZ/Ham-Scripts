@@ -3,11 +3,9 @@ EOF
 
 #!/bin/bash
 
-# Check if JS8Spotter is already installed
-if [ -d "$HOME/js8spotter-112b" ] && [ -f "$HOME/js8spotter-112b/js8spotter.py" ]; then
-  echo "JS8Spotter is already installed. Skipping installation."
-  exit 0
-fi
+command -v wget >/dev/null 2>&1 || { echo "wget is not installed. Please install it first."; exit 1; }
+command -v unzip >/dev/null 2>&1 || { echo "unzip is not installed. Please install it first."; exit 1; }
+command -v python3 >/dev/null 2>&1 || { echo "python3 is not installed. Please install it first."; exit 1; }
 
 # Update package list
 echo "Updating package list..."
