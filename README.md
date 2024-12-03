@@ -14,7 +14,7 @@ git clone https://github.com/KL5HZ/Ham-Scripts.git $HOME/Ham-Scripts && bash $HO
 
 Or choose the Ham software you want and 'wget' the raw url of that script. Then run 'sh ./(file name)'.
 
-To check for updates in the repo, run this command from your home directory:
+To check for updates to the repo, run this command from your home directory:
 ```
 sh ./Ham-Scripts/install-ham-scripts.sh
 ```
