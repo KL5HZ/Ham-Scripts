@@ -8,52 +8,32 @@ if ! sudo apt-get update; then
 fi
 
 # Install required Python packages
-echo "Checking for required Python packages..."
-REQUIRED_PACKAGES=(python3-tk python3-pil python3-pil.imagetk python3-requests python3-tksnack)
-for PACKAGE in "${REQUIRED_PACKAGES[@]}"; do
-  if dpkg -l | grep -q "^ii  $PACKAGE"; then
-    echo "$PACKAGE is already installed. Skipping..."
-  else
-    echo "Installing $PACKAGE..."
-    if ! sudo apt install -y "$PACKAGE"; then
-      echo "Failed to install $PACKAGE. Exiting..."
-      exit 1
-    fi
-  fi
-done
-
-# Check if js8spotter zip is already downloaded
-if [ ! -f "js8spotter-112b.zip" ]; then
-  echo "Downloading js8spotter zip..."
-  if ! wget -q "https://kf7mix.com/files/js8spotter/js8spotter-112b.zip"; then
-    echo "Failed to download js8spotter. Exiting..."
-    exit 1
-  fi
-else
-  echo "js8spotter zip already downloaded. Skipping..."
+echo "Installing Python packages..."
+if ! sudo apt install -y python3-tk python3-pil python3-pil.imagetk python3-requests python3-tksnack; then
+  echo "Failed to install Python packages. Exiting..."
+  exit 1
 fi
 
-# Check if js8spotter is already unzipped
-if [ ! -d "$HOME/js8spotter-112b" ]; then
-  echo "Unzipping js8spotter..."
-  if ! unzip -o js8spotter-112b.zip -d "$HOME"; then
-    echo "Failed to unzip js8spotter. Exiting..."
-    exit 1
-  fi
-else
-  echo "js8spotter directory already exists. Skipping unzip..."
+# Download js8spotter package
+echo "Downloading js8spotter zip..."
+if ! wget -q "https://kf7mix.com/files/js8spotter/js8spotter-112b.zip"; then
+  echo "Failed to download js8spotter. Exiting..."
+  exit 1
+fi
+
+# Unzip js8spotter
+echo "Unzipping js8spotter..."
+if ! unzip -o js8spotter-112b.zip; then
+  echo "Failed to unzip js8spotter. Exiting..."
+  exit 1
 fi
 
 # Remove zip file
-if [ -f "js8spotter-112b.zip" ]; then
-  rm js8spotter-112b.zip
-fi
+rm js8spotter-112b.zip
 
 # Create desktop shortcut
-DESKTOP_SHORTCUT="$HOME/Desktop/JS8Spotter.desktop"
-if [ ! -f "$DESKTOP_SHORTCUT" ]; then
-  echo "Creating js8spotter desktop shortcut..."
-  cat <<EOF > "$DESKTOP_SHORTCUT"
+echo "Creating js8spotter desktop shortcut..."
+cat <<EOF > $HOME/Desktop/JS8Spotter.desktop
 [Desktop Entry]
 Version=1.0
 Name=JS8Spotter
@@ -64,16 +44,16 @@ Path=$HOME/js8spotter-112b/
 Terminal=false
 Type=Application
 EOF
-  chmod +x "$DESKTOP_SHORTCUT"
 
-  # Enable 'Allow Launching' if supported
-  if command -v gio &> /dev/null; then
-      gio set "$DESKTOP_SHORTCUT" metadata::trusted true
-  else
-      echo "gio not found; skipping 'Allow Launching' setup."
-  fi
+# Set permissions and enable 'Allow Launching'
+chmod +x $HOME/js8spotter-112b/js8spotter.py
+chmod +x $HOME/Desktop/JS8Spotter.desktop
+
+# Enable 'Allow Launching' if supported
+if command -v gio &> /dev/null; then
+    gio set $HOME/Desktop/JS8Spotter.desktop metadata::trusted true
 else
-  echo "Desktop shortcut already exists. Skipping..."
+    echo "gio not found; skipping 'Allow Launching' setup."
 fi
 
 # Clean up unnecessary files
