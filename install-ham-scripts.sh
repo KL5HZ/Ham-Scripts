@@ -1,4 +1,4 @@
-chmod +x script.sh 
+chmod +x install-ham-scripts.sh 
 #!/bin/bash
 #
 # Author  : Anthony Woodward

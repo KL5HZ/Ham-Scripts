@@ -1,4 +1,4 @@
-chmod +x script.sh 
+chmod +x install-js8spotter.sh 
 
 #!/bin/bash
 

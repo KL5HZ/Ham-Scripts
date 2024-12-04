@@ -1,4 +1,4 @@
-chmod +x script.sh 
+chmod +x install-wsjtx.sh 
    
 #!/bin/bash
 
