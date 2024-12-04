@@ -1,3 +1,5 @@
+chmod +x script.sh 
+
 #!/bin/bash
 
 # Update package list

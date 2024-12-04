@@ -1,3 +1,5 @@
+chmod +x script.sh 
+   
 #!/bin/bash
 
 # Check if WSJT-X is already installed

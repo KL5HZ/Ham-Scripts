@@ -1,3 +1,4 @@
+chmod +x script.sh 
 #!/bin/bash
 #
 # Author  : Anthony Woodward
