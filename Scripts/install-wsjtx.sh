@@ -1,4 +1,4 @@
-chmod +x install-wsjtx.sh && ./install-wsjtx.sh 
+chmod +x install-wsjtx.sh && sh ./install-wsjtx.sh 
    
 #!/bin/bash
 
