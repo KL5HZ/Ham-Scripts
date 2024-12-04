@@ -1,9 +1,9 @@
-chmod +x install-ham-scripts.sh && sh ./install-ham-scripts.sh 
+chmod +x Ham-Scripts/install-ham-scripts.sh && sh ./Ham-Scripts/install-ham-scripts.sh 
 #!/bin/bash
 #
 # Author  : Anthony Woodward
 # Date    : 1 December 2024
-# Updated : 22 November 2024
+# Updated : 4 December 2024
 # Purpose : Main installer for Ham Radio programs
 
 # Variables
