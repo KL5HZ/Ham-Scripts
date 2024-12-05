@@ -5,7 +5,7 @@
 # Purpose : Environment detection script for Ham-Scripts installer
 
 # Define the default directory for regular users (modify as needed)
-USER_INSTALL_DIR="$HOME/ham-scripts"
+USER_INSTALL_DIR="$HOME/"
 
 # Detect if running in Cubic by checking if /etc/skel is writable
 if [ -w /etc/skel ]; then
