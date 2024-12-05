@@ -1,5 +1,8 @@
-chmod +x Scripts/install-js8spotter.sh && sh ./Scripts/install-js8spotter.sh
+#!/bin/bash
 
+# Define script name and content
+SCRIPT_NAME="install-js8spotter.sh"
+SCRIPT_CONTENT=$(cat <<'EOF'
 #!/bin/bash
 
 # Update package list
@@ -35,25 +38,25 @@ rm js8spotter-112b.zip
 
 # Create desktop shortcut
 echo "Creating js8spotter desktop shortcut..."
-cat <<EOF > $HOME/Desktop/JS8Spotter.desktop
+cat <<DESKTOP > $INSTALL_DIR/Desktop/JS8Spotter.desktop
 [Desktop Entry]
 Version=1.0
 Name=JS8Spotter
 Comment=JS8Spotter
-Exec=python3 $HOME/js8spotter-112b/js8spotter.py
-Icon=$HOME/js8spotter-112b/js8spotter.ico
-Path=$HOME/js8spotter-112b/
+Exec=python3 $INSTALL_DIR/js8spotter-112b/js8spotter.py
+Icon=$INSTALL_DIR/js8spotter-112b/js8spotter.ico
+Path=$INSTALL_DIR/js8spotter-112b/
 Terminal=false
 Type=Application
-EOF
+DESKTOP
 
 # Set permissions and enable 'Allow Launching'
-chmod +x $HOME/js8spotter-112b/js8spotter.py
-chmod +x $HOME/Desktop/JS8Spotter.desktop
+chmod +x $INSTALL_DIR/js8spotter-112b/js8spotter.py
+chmod +x $INSTALL_DIR/Desktop/JS8Spotter.desktop
 
 # Enable 'Allow Launching' if supported
 if command -v gio &> /dev/null; then
-    gio set $HOME/Desktop/JS8Spotter.desktop metadata::trusted true
+    gio set $INSTALL_DIR/Desktop/JS8Spotter.desktop metadata::trusted true
 else
     echo "gio not found; skipping 'Allow Launching' setup."
 fi
@@ -63,4 +66,22 @@ echo "Cleaning up..."
 sudo apt-get autoremove -y && sudo apt-get clean
 
 echo "Installation complete. Enjoy using JS8Spotter!"
+EOF
+)
 
+# Determine installation directory
+INSTALL_DIR=""
+if [ -w /etc/skel ]; then
+    echo "Detected Cubic environment."
+    INSTALL_DIR="/etc/skel"
+else
+    echo "Regular user environment detected."
+    INSTALL_DIR="$HOME"
+fi
+
+# Create script in the appropriate directory
+echo "Creating installation script in $INSTALL_DIR..."
+echo "$SCRIPT_CONTENT" > "$INSTALL_DIR/$SCRIPT_NAME"
+chmod +x "$INSTALL_DIR/$SCRIPT_NAME"
+
+echo "Setup complete. Script is located at $INSTALL_DIR/$SCRIPT_NAME."
