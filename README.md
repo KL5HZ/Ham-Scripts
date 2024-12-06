@@ -11,6 +11,7 @@ Then, install everything with this command:
 ```
 git clone https://github.com/KL5HZ/Ham-Scripts.git $HOME/Ham-Scripts && bash $HOME/Ham-Scripts/install-ham-scripts.sh
 ```
+**NOTE: Currently, JS8Spotter is not installing correctly onto the machine via cubic install. I am working on a fix for this, but for now you will need to run the script post install.**
 
 Or choose the Ham software you want and 'wget' the raw url of that script. Then run 'sh ./(file name)'.
 
