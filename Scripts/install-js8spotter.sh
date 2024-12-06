@@ -60,9 +60,9 @@ cat <<EOF > "$DESKTOP_FILE"
 Version=1.0
 Name=JS8Spotter
 Comment=JS8Spotter Application
-Exec=python3 $WORK_DIR/js8spotter.py
-Icon=$WORK_DIR/js8spotter.ico
-Path=$WORK_DIR
+Exec=python3 $HOME/js8spotter-112b/js8spotter.py
+Icon=$HOME/js8spotter-112b/js8spotter.ico
+Path=$HOME/js8spotter-112b
 Terminal=false
 Type=Application
 EOF
