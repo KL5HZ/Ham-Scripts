@@ -1,64 +1,100 @@
 #!/bin/bash
+#
+# Author  : Anthony Woodward
+# Date    : 4 December 2024
+# Purpose : Install and configure JS8Spotter dynamically for regular users or Cubic environments
+
+# Load environment detection
+if [ -f ./detect-env.sh ]; then
+    source ./detect-env.sh
+else
+    echo "Error: Environment detection script (detect-env.sh) not found!"
+    exit 1
+fi
+
+# Variables
+WORK_DIR="$INSTALL_DIR/js8spotter-112b"
+DESKTOP_FILE="$INSTALL_DIR/Desktop/JS8Spotter.desktop"
+JS8_URL="https://kf7mix.com/files/js8spotter/js8spotter-112b.zip"
+ZIP_FILE="$INSTALL_DIR/js8spotter-112b.zip"
+
+# Ensure required directories exist
+echo "Ensuring directories exist..."
+mkdir -p "$INSTALL_DIR/Desktop" || { echo "Failed to create desktop directory. Exiting."; exit 1; }
+mkdir -p "$WORK_DIR" || { echo "Failed to create working directory. Exiting."; exit 1; }
 
 # Update package list
 echo "Updating package list..."
 if ! sudo apt-get update; then
-  echo "Failed to update package list. Exiting..."
-  exit 1
+    echo "Failed to update package list. Exiting."
+    exit 1
 fi
 
-# Install required Python packages
-echo "Installing Python packages..."
-if ! sudo apt install -y python3-tk python3-pil python3-pil.imagetk python3-requests python3-tksnack; then
-  echo "Failed to install Python packages. Exiting..."
-  exit 1
+# Install dependencies
+echo "Installing required dependencies..."
+if ! sudo apt install -y python3-tk python3-pil python3-pil.imagetk python3-requests python3-tksnack unzip wget; then
+    echo "Failed to install dependencies. Exiting."
+    exit 1
 fi
 
-# Download js8spotter package
-echo "Downloading js8spotter zip..."
-if ! wget -q "https://kf7mix.com/files/js8spotter/js8spotter-112b.zip"; then
-  echo "Failed to download js8spotter. Exiting..."
-  exit 1
+# Download JS8Spotter
+echo "Downloading JS8Spotter package..."
+if ! wget -q -O "$ZIP_FILE" "$JS8_URL"; then
+    echo "Failed to download JS8Spotter package. Exiting."
+    exit 1
 fi
 
-# Unzip js8spotter
-echo "Unzipping js8spotter..."
-if ! unzip -o js8spotter-112b.zip; then
-  echo "Failed to unzip js8spotter. Exiting..."
-  exit 1
+# Extract the package
+echo "Extracting JS8Spotter package..."
+if ! unzip -o "$ZIP_FILE" -d "$INSTALL_DIR"; then
+    echo "Failed to extract JS8Spotter package. Exiting."
+    rm "$ZIP_FILE"
+    exit 1
 fi
-
-# Remove zip file
-rm js8spotter-112b.zip
+#rm "$ZIP_FILE"
 
 # Create desktop shortcut
-echo "Creating js8spotter desktop shortcut..."
-cat <<EOF > $HOME/Desktop/JS8Spotter.desktop
+echo "Creating desktop shortcut..."
+cat <<EOF > "$DESKTOP_FILE"
 [Desktop Entry]
 Version=1.0
 Name=JS8Spotter
-Comment=JS8Spotter
+Comment=JS8Spotter Application
 Exec=python3 $HOME/js8spotter-112b/js8spotter.py
 Icon=$HOME/js8spotter-112b/js8spotter.ico
-Path=$HOME/js8spotter-112b/
+Path=$HOME/js8spotter-112b
 Terminal=false
 Type=Application
 EOF
 
-# Set permissions and enable 'Allow Launching'
-chmod +x $HOME/js8spotter-112b/js8spotter.py
-chmod +x $HOME/Desktop/JS8Spotter.desktop
+# Set permissions
+echo "Setting permissions..."
+chmod +x "$WORK_DIR/js8spotter.py"
+chmod +x "$DESKTOP_FILE"
 
-# Enable 'Allow Launching' if supported
-if command -v gio &> /dev/null; then
-    gio set $HOME/Desktop/JS8Spotter.desktop metadata::trusted true
+# Allow launching if gio is available
+if command -v gio &>/dev/null; then
+    echo "Allowing launching for desktop shortcut..."
+    gio set "$DESKTOP_FILE" metadata::trusted true
 else
-    echo "gio not found; skipping 'Allow Launching' setup."
+    echo "gio command not found. Skipping 'Allow Launching' setup."
 fi
 
-# Clean up unnecessary files
-echo "Cleaning up..."
-sudo apt-get autoremove -y && sudo apt-get clean
+# Adjust permissions for /etc/skel during Cubic install
+if [ "$INSTALL_DIR" = "/etc/skel" ]; then
+    echo "Adjusting permissions for Cubic environment..."
+    chown -R root:root "$WORK_DIR"
+    chmod -R 755 "$WORK_DIR"
+    chown root:root "$DESKTOP_FILE"
+    chmod 755 "$DESKTOP_FILE"
+fi
 
-echo "Installation complete. Enjoy using JS8Spotter!"
+# Verify installation
+if [ -f "$WORK_DIR/js8spotter.py" ]; then
+    echo "JS8Spotter installed successfully in $INSTALL_DIR."
+else
+    echo "JS8Spotter installation failed. Please check for errors."
+    exit 1
+fi
 
+echo "Installation complete! You can launch JS8Spotter from the desktop shortcut."

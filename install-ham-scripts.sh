@@ -2,51 +2,61 @@
 #
 # Author  : Anthony Woodward
 # Date    : 1 December 2024
-# Updated : 22 November 2024
+# Updated : 4 December 2024
 # Purpose : Main installer for Ham Radio programs
 
-# Variables
-REPO_DIR="$HOME/Ham-Scripts" # Directory of your repository
-BRANCH="main" # Default branch to pull from
-
-#Checking for apt updates
-echo "Checking for system updates..."
-sudo apt-get update
-
-# Check for updates
-echo "Checking for updates from the repository..."
-cd $REPO_DIR || { echo "Directory $REPO_DIR does not exist. Exiting."; exit 1; }
-
-# Fetch the latest changes
-git fetch origin
-
-# Check if there are updates
-if [ $(git rev-list HEAD...origin/$BRANCH --count) -gt 0 ]; then
-    echo "Updates found. Pulling the latest changes..."
-    git pull origin $BRANCH || { echo "Failed to pull updates. Exiting."; exit 1; }
+# Load environment detection
+if [ -f ./detect-env.sh ]; then
+    source ./detect-env.sh
 else
-    echo "No updates found. Proceeding with the installation..."
+    echo "Error: Environment detection script (detect-env.sh) not found!"
+    exit 1
 fi
 
-#Change back to home directory
-cd
+# Variables
+REPO_DIR="$INSTALL_DIR/Ham-Scripts" # Repository directory based on environment
+BRANCH="dev-work" # Default branch to pull from
 
-# Install programs
+# Check for system updates
+echo "Checking for system updates..."
+if ! sudo apt-get update; then
+    echo "Failed to update package list. Exiting."
+    exit 1
+fi
+
+# Check for repository updates
+echo "Checking for updates from the repository..."
+if [ ! -d "$REPO_DIR" ]; then
+    echo "Repository directory $REPO_DIR does not exist. Cloning the repository..."
+    git clone -b $BRANCH https://github.com/KL5HZ/Ham-Scripts.git "$REPO_DIR" || {
+        echo "Failed to clone the repository. Exiting.";
+        exit 1;
+    }
+else
+    cd "$REPO_DIR" || { echo "Failed to access repository directory $REPO_DIR. Exiting."; exit 1; }
+    git fetch origin
+    if [ "$(git rev-list HEAD...origin/$BRANCH --count)" -gt 0 ]; then
+        echo "Updates found. Pulling the latest changes..."
+        git pull origin $BRANCH || { echo "Failed to pull updates. Exiting."; exit 1; }
+    else
+        echo "No updates found. Proceeding with the installation..."
+    fi
+    cd - >/dev/null || exit 1
+fi
+
+# Start installation
 echo "Starting installation..."
 
-# Change directory for scripts
-mv $REPO_DIR/Scripts $HOME/Scripts
-
 # Execute scripts
-sh ./Scripts/install-js8spotter.sh || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
-sh ./Scripts/install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exit 1; }
+echo "Installing JS8Spotter..."
+bash "$REPO_DIR/Scripts/install-js8spotter.sh" || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
 
-# Return scripts to original directory
-mv $HOME/Scripts $REPO_DIR/Scripts
+echo "Installing WSJT-X..."
+bash "$REPO_DIR/Scripts/install-wsjtx.sh" || { echo "Failed to install WSJT-X. Exiting."; exit 1; }
 
-#Clean-up home directory
-echo "Cleaning up. One moment..."
-rm -f $HOME/{*,.*}
+# Clean up unnecessary files
+echo "Cleaning up unnecessary files..."
+sudo apt-get autoremove -y
+sudo apt-get clean
 
 echo "Installation complete!"
-
