@@ -51,7 +51,7 @@ if ! unzip -o "$ZIP_FILE" -d "$INSTALL_DIR"; then
     rm "$ZIP_FILE"
     exit 1
 fi
-rm "$ZIP_FILE"
+#rm "$ZIP_FILE"
 
 # Create desktop shortcut
 echo "Creating desktop shortcut..."
