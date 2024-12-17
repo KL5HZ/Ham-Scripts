@@ -7,7 +7,7 @@
 
 # Load environment detection
 if [ -f ./detect-env.sh ]; then
-    source ./detect-env.sh
+    source $HOME/detect-env.sh
 else
     echo "Error: Environment detection script (detect-env.sh) not found!"
     exit 1
