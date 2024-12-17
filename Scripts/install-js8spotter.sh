@@ -5,8 +5,8 @@
 # Purpose : Install and configure JS8Spotter dynamically for regular users or Cubic environments
 
 # Load environment detection
-if [ -f ./detect-env.sh ]; then
-    source ./detect-env.sh
+if [ -f $HOME/Ham-Scripts/detect-env.sh ]; then
+    source $HOME/Ham-Scripts/detect-env.sh
 else
     echo "Error: Environment detection script (detect-env.sh) not found!"
     exit 1
