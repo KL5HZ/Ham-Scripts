@@ -15,7 +15,7 @@ fi
 
 # Variables
 REPO_DIR="$INSTALL_DIR/Ham-Scripts" # Repository directory based on environment
-BRANCH="dev-work" # Default branch to pull from
+BRANCH="main" # Default branch to pull from
 
 # Check for system updates
 echo "Checking for system updates..."
