@@ -6,12 +6,13 @@
 # Purpose : Main installer for Ham Radio programs
 
 # Load environment detection
-if [ -f ./detect-env.sh ]; then
-    source $HOME/detect-env.sh
+if [ -f "$HOME/detect-env.sh" ]; then
+    source "$HOME/detect-env.sh"
 else
-    echo "Error: Environment detection script (detect-env.sh) not found!"
+    echo "Error: Environment detection script (detect-env.sh) not found in $HOME!"
     exit 1
 fi
+
 
 # Variables
 REPO_DIR="$INSTALL_DIR/Ham-Scripts" # Repository directory based on environment
