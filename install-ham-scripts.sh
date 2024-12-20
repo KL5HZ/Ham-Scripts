@@ -50,10 +50,10 @@ echo "Starting installation..."
 
 # Execute scripts
 echo "Installing JS8Spotter..."
-bash "$REPO_DIR/scripts/install-js8spotter.sh" || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
+bash "$REPO_DIR/Scripts/install-js8spotter.sh" || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
 
 echo "Installing WSJT-X..."
-bash "$REPO_DIR/scripts/install-wsjtx.sh" || { echo "Failed to install WSJT-X. Exiting."; exit 1; }
+bash "$REPO_DIR/Scripts/install-wsjtx.sh" || { echo "Failed to install WSJT-X. Exiting."; exit 1; }
 
 # Clean up unnecessary files
 echo "Cleaning up unnecessary files..."
