@@ -6,7 +6,7 @@
 # Purpose : Main installer for Ham Radio programs
 
 # Variables
-REPO_DIR="$HOME/Ham-Scripts" # Directory of your repository
+REPO_DIR="$HOME/ham-scripts" # Directory of your repository
 BRANCH="main" # Default branch to pull from
 
 # Check for updates
@@ -34,11 +34,11 @@ echo "Starting installation..."
 mv $REPO_DIR/Scripts $HOME/Scripts
 
 # Execute scripts
-sh ./Scripts/install-js8spotter.sh || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
-sh ./Scripts/install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exit 1; }
+sh ./scripts/install-js8spotter.sh || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
+sh ./scripts/install-wsjtx.sh || { echo "Failed to install WSJTX. Exiting."; exit 1; }
 
 # Return scripts to original directory
-mv $HOME/Scripts $REPO_DIR/Scripts
+mv $HOME/scripts $REPO_DIR/scripts
 
 #Clean-up home directory
 echo "Cleaning up. One moment..."
