@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Source environment detection
-if [ -f $HOME/Ham-Scripts/detect-env.sh ]; then
-    source $HOME/Ham-Scripts/detect-env.sh
+if [ -f $HOME/ham-scripts/detect-env.sh ]; then
+    source $HOME/ham-scripts/detect-env.sh
 else
     echo "Error: Environment detection script (detect-env.sh) not found!"
     exit 1
