@@ -6,16 +6,16 @@
 # Purpose : Main installer for Ham Radio programs
 
 # Load environment detection
-if [ -f "$HOME/Ham-Scripts/detect-env.sh" ]; then
-    source "$HOME/Ham-Scripts/detect-env.sh"
+if [ -f "$HOME/ham-scripts/detect-env.sh" ]; then
+    source "$HOME/ham-scripts/detect-env.sh"
 else
-    echo "Error: Environment detection script (detect-env.sh) not found in $HOME/Ham-Scripts!"
+    echo "Error: Environment detection script (detect-env.sh) not found in $HOME/ham-scripts!"
     exit 1
 fi
 
 
 # Variables
-REPO_DIR="$INSTALL_DIR/Ham-Scripts" # Repository directory based on environment
+REPO_DIR="$INSTALL_DIR/ham-scripts" # Repository directory based on environment
 BRANCH="main" # Default branch to pull from
 
 # Check for system updates
@@ -29,7 +29,7 @@ fi
 echo "Checking for updates from the repository..."
 if [ ! -d "$REPO_DIR" ]; then
     echo "Repository directory $REPO_DIR does not exist. Cloning the repository..."
-    git clone -b $BRANCH https://github.com/KL5HZ/Ham-Scripts.git "$REPO_DIR" || {
+    git clone -b $BRANCH https://github.com/kl5hz/ham-scripts.git "$REPO_DIR" || {
         echo "Failed to clone the repository. Exiting.";
         exit 1;
     }
@@ -50,10 +50,10 @@ echo "Starting installation..."
 
 # Execute scripts
 echo "Installing JS8Spotter..."
-bash "$REPO_DIR/Scripts/install-js8spotter.sh" || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
+bash "$REPO_DIR/scripts/install-js8spotter.sh" || { echo "Failed to install JS8Spotter. Exiting."; exit 1; }
 
 echo "Installing WSJT-X..."
-bash "$REPO_DIR/Scripts/install-wsjtx.sh" || { echo "Failed to install WSJT-X. Exiting."; exit 1; }
+bash "$REPO_DIR/scripts/install-wsjtx.sh" || { echo "Failed to install WSJT-X. Exiting."; exit 1; }
 
 # Clean up unnecessary files
 echo "Cleaning up unnecessary files..."
